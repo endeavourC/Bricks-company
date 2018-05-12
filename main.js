@@ -1,6 +1,7 @@
     $('.about-header,.about-info,.f,.left-side-offer-content,.contact h1,.image-one,.image-three,.image-six,.image-eight').addClass('fadeout');
 
     $(window).on('load', function () {
+        $('.loader').fadeOut(600);
         const hamburgerBtn = $('div#nav-icon-container');
         const mainSliderArray = [$('div.image-first'), $('div.image-second')];
         hamburgerBtn.on('click', function () {
