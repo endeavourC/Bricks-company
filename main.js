@@ -9,9 +9,17 @@
             $('header nav').toggleClass('transformed-nav');
             $('main').toggleClass('transformed-main');
         });
+
+        let bool = true;
         var interval;
         let mainCounter = 0;
         $(window).on('focus', function () {
+            bool = true;
+        })
+        $(window).on('blur', function () {
+            bool = false;
+        })
+        if (bool === true) {
             interval = setInterval(function () {
                 if (mainCounter === 1) {
                     mainCounter = -1;
@@ -23,10 +31,9 @@
                     opacity: 0,
                 }, 1000, 'swing');
             }, 3500);
-        })
-        $(window).on('blur', function () {
+        } else {
             clearInterval(interval);
-        });
+        }
 
         let navigationLink = $('nav ul li a');
 
