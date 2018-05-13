@@ -9,32 +9,6 @@
             $('header nav').toggleClass('transformed-nav');
             $('main').toggleClass('transformed-main');
         });
-
-        let bool = true;
-        var interval;
-        let mainCounter = 0;
-        $(window).on('focus', function () {
-            bool = true;
-        })
-        $(window).on('blur', function () {
-            bool = false;
-        })
-        if (bool === true) {
-            interval = setInterval(function () {
-                if (mainCounter === 1) {
-                    mainCounter = -1;
-                }
-                mainCounter++;
-                mainSliderArray[mainCounter].animate({
-                    opacity: 1,
-                }, 1000, 'swing').siblings('div').animate({
-                    opacity: 0,
-                }, 1000, 'swing');
-            }, 3500);
-        } else {
-            clearInterval(interval);
-        }
-
         let navigationLink = $('nav ul li a');
 
         function moveTo(data) {

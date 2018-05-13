@@ -273,13 +273,6 @@ nav ul li a {
     background-image: url(zdj/background.jpeg);
 }
 
-.image-second {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    background-image: url(zdj/background-two.jpeg)
-}
 
 .slider-title-of-page {
     z-index: 2;
