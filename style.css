@@ -270,7 +270,7 @@ nav ul li a {
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url(zdj/background.jpeg);
+    background-image: url(zdj/background.jpg);
 }
 
 
@@ -419,7 +419,7 @@ nav ul li a {
 .offer .bg-parallax {
     width: 100%;
     min-height: 50vh;
-    background-image: url(zdj/worker.jpeg);
+    background-image: url(zdj/worker.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -615,7 +615,7 @@ nav ul li a {
 
 
 .image-one {
-    background-image: url(zdj/gallery-image.jpeg);
+    background-image: url(zdj/gallery-image.jpg);
 
 }
 
@@ -625,32 +625,32 @@ nav ul li a {
 }
 
 .image-three {
-    background: url(zdj/gallery-image-two.jpeg);
+    background: url(zdj/gallery-image-two.jpg);
 
 }
 
 .image-four {
-    background: url(zdj/gallery-image-three.jpeg);
+    background: url(zdj/gallery-image-three.jpg);
     background-position: bottom;
 
 }
 
 .image-five {
-    background: url(zdj/gallery-image-four.jpeg);
+    background: url(zdj/gallery-image-four.jpg);
     background-position: bottom;
 }
 
 .image-six {
-    background: url(zdj/gallery-image-five.jpeg);
+    background: url(zdj/gallery-image-five.jpg);
 }
 
 .image-seven {
-    background: url(zdj/gallery-image-six.jpeg);
+    background: url(zdj/gallery-image-six.jpg);
     background-position: bottom;
 }
 
 .image-eight {
-    background: url(zdj/gallery-image-seven.jpeg);
+    background: url(zdj/gallery-image-seven.jpg);
     background-position: bottom;
 
 }
@@ -691,7 +691,7 @@ nav ul li a {
 
 .contact .contact-form .contact-image {
     width: 50%;
-    background: url(zdj/contact-image.jpeg);
+    background: url(zdj/contact-image.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
