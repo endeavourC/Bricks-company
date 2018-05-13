@@ -55,7 +55,7 @@
     justify-content: center;
     -ms-align-items: center;
     align-items: center;
-    background: white;
+    background: rgba( 255, 255, 255, 0.85);
     z-index: 999999999;
 }
 
@@ -776,10 +776,10 @@ nav ul li a {
 
 @media(max-width: 960px) {
     .image-first {
-        background-attachment: scroll;
+        background-attachment: scroll!important;
     }
     .image-second {
-        background-attachment: scroll;
+        background-attachment: scroll!important;
 
     }
     .about .about-image::after {
@@ -812,17 +812,10 @@ nav ul li a {
 }
 
 @media (max-width: 767px) {
-    .dark {
-        width: 100%;
-        height: 100%;
-        z-index: 5;
-        position: fixed;
-        display: none;
-        background-color: rgba( 0, 0, 0, 0.869);
-    }
+
     main {
         position: relative;
-        transition: transform .4s ease;
+        transition: all .4s ease;
     }
     #nav-icon-container {
         display: block;
@@ -861,6 +854,7 @@ nav ul li a {
         transform: translateY(0%);
         transform: translateZ(0);
         -webkit-transform: translateX(-70%);
+        opacity: 0.2;
     }
 
     .transformed-nav {
