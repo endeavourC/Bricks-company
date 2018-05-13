@@ -5,7 +5,6 @@
         const hamburgerBtn = $('div#nav-icon-container');
         const mainSliderArray = [$('div.image-first'), $('div.image-second')];
         hamburgerBtn.on('click', function () {
-            $('div.dark').fadeToggle(100);
             $('#nav-icon').toggleClass('open');
             $('header nav').toggleClass('transformed-nav');
             $('main').toggleClass('transformed-main');
@@ -26,7 +25,6 @@
 
         function moveTo(data) {
             setTimeout(function () {
-                $('div.dark').fadeOut(100);
                 $('#nav-icon').removeClass('open');
                 $('header nav').removeClass('transformed-nav');
                 $('main').removeClass('transformed-main');
