@@ -6,17 +6,13 @@
         const mainSliderArray = [$('div.image-first'), $('div.image-second')];
         hamburgerBtn.on('click', function () {
             $('#nav-icon').toggleClass('open');
-            $('header nav').toggleClass('transformed-nav');
-            $('main').toggleClass('transformed-main');
+            $('header nav ul').toggleClass('show');
         });
         let navigationLink = $('nav ul li a');
 
         function moveTo(data) {
-            setTimeout(function () {
-                $('#nav-icon').removeClass('open');
-                $('header nav').removeClass('transformed-nav');
-                $('main').removeClass('transformed-main');
-            }, 500)
+            $('#nav-icon').removeClass('open');
+            $('header nav ul').removeClass('show');
             data = $(this).data('name');
             $('body,html').animate({
                 scrollTop: $('.' + data).offset().top - 80 + 'px'
