@@ -1,82 +1,93 @@
-    $('.about-header,.about-info,.f,.left-side-offer-content,.contact h1,.image-one,.image-three,.image-six,.image-eight').addClass('fadeout');
+const cityNameInp = document.querySelector('#city-to-check');
+let cityTitle = document.querySelector('.city-title');
+let cityCountry = document.querySelector('.city-country');
+let cityTemp = document.querySelector('.city-temp');
+let cityWind = document.querySelector('.city-wind');
+let cityPressure = document.querySelector('.city-pressure');
+let cityDataOfDay = document.querySelector('.city-data-of-day');
+let cityImage = document.querySelector('.city-image');
+let cityExists = false;
+cityNameInp.addEventListener('keyup', checkWeather);
 
-    $(window).on('load', function () {
-        $('.loader').fadeOut(600);
-        const hamburgerBtn = $('div#nav-icon-container');
-        const mainSliderArray = [$('div.image-first'), $('div.image-second')];
-        hamburgerBtn.on('click', function () {
-            $('#nav-icon').toggleClass('open');
-            $('header nav ul').toggleClass('show');
-        });
-        let navigationLink = $('nav ul li a');
-
-        function moveTo(data) {
-            $('#nav-icon').removeClass('open');
-            $('header nav ul').removeClass('show');
-            data = $(this).data('name');
-            $('body,html').animate({
-                scrollTop: $('.' + data).offset().top - 80 + 'px'
-            }, 500, 'swing')
-        };
-
-
-        $('.start').on('click', function () {
-            $('html,body').animate({
-                scrollTop: $('.about').offset().top - 80 + 'px',
-            }, 1000, 'swing');
+function loadImage(url) {
+    return fetch(url)
+        .then(data => data.json())
+        .then(data => {
+            if (data.status === "OK") {
+                let reference = data.results[0].photos[0].photo_reference;
+                if (reference) {
+                    cityImage.style.backgroundImage = `url(https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference=${reference}&key=AIzaSyAVEoBlH2p65Whg0bJsP3TeJfvTMXBqMFc)`
+                    cityExists = true;
+                }
+            } else {
+                cityExists = false;
+                return false;
+            }
         })
-        navigationLink.on('click', moveTo);
-        $(window).on('scroll', function () {
-            let about = $('.about').offset().top;
-            let offer = $('.offer').offset().top;
-            let gallery = $('.gallery').offset().top;
-            let contact = $('.contact').offset().top;
-            let pg = pageYOffset;
-            if (pg + 300 > about && pg < offer) {
-                $('.about-header').addClass('fadein').removeClass('fadeout');
-                $('.about-info').addClass('fadein').removeClass('fadeout');
-            };
-            if (pg + 300 > offer && pg < gallery) {
-                $('.f').addClass('fadein').removeClass('fadeout');
-            };
-            if (pg + 200 > $('.offer-features').offset().top && pg < gallery) {
-                $('.left-side-offer-content').addClass('fadein').removeClass('fadeout')
-            };
-            if (pg + 300 > gallery && pg < contact) {
-                $('.image-one,.image-three,.image-six,.image-eight').addClass('fadein').removeClass('fadeout')
-            }
-            if (pg + 400 > contact) {
-                $('.contact h1').addClass('fadein').removeClass('fadeout')
+        .catch(err => console.log(err))
+}
 
-            }
-        });
-        const arrowLeft = $('i.fa-caret-left');
-        const arrowRight = $('i.fa-caret-right');
-        const exitBtn = $('i.fa-times');
-        let currentImage;
-        let imageToClick = $('.gallery').find('div');
-        let gallerySliderImage = $('.gallery-slider').find('img');
-        imageToClick.on('click', function () {
-            currentImage = $(this).data('value');
-            $('.gallery-slider').fadeIn(300);
-            gallerySliderImage.eq(currentImage).fadeIn(300);
-        });
-        arrowRight.on('click', function () {
-            if (currentImage === 7) {
-                currentImage = -1;
-            }
-            currentImage++;
-            gallerySliderImage.eq(currentImage).fadeIn(400).siblings('img').fadeOut(400);
-        });
-        arrowLeft.on('click', function () {
-            if (currentImage === 0) {
-                currentImage = gallerySliderImage.length;
-            }
-            currentImage--;
-            gallerySliderImage.eq(currentImage).fadeIn(400).siblings('img').fadeOut(400)
-        });
-        exitBtn.on('click', function () {
-            $('.gallery-slider').fadeOut(300);
-            gallerySliderImage.fadeOut(300);
+function convertDegrees(number) {
+    return Math.floor(number - 273) + "℃";
+}
+
+function convertWindUnit(number) {
+    return Math.floor(number * 3600 / 1000) + "km/h";
+}
+
+function leadingZero(i) {
+    return (i < 10) ? '0' + i : i;
+}
+
+function getDate(callback) {
+    const date = new Date();
+    return `${callback(date.getDate())}.${callback(date.getMonth())}.${callback(date.getFullYear())} ${callback(date.getHours())}:${callback(date.getMinutes())}:${date.getSeconds()}`
+}
+
+function showArticle() {
+    document.querySelector('.typed-city-container').classList.add('fadein')
+}
+
+function loadWeatherInformation(url) {
+    return fetch(url)
+        .then(data => data.json())
+        .then(data => {
+            console.log(data)
+            cityTitle.innerHTML = `${data.name},`;
+            cityCountry.innerHTML = `kraj: ${data.sys.country}`;
+            cityTemp.innerHTML = `temperatura: ${convertDegrees(data.main.temp)}`;
+            cityWind.innerHTML = `wiatr: ${convertWindUnit(data.wind.speed)} `;
+            cityPressure.innerHTML = `ciśnienie:  ${data.main.pressure} hPa`;
+            cityDataOfDay.innerHTML = `dane na dzień: ${getDate(leadingZero)}`
+
         })
-    });
+}
+
+function checkWeather(e, name) {
+    e.preventDefault();
+    if (e.keyCode === 13) {
+        document.querySelector('.preloader').style.opacity = 1;
+        document.querySelector('.preloader').style.zIndex = 1;
+        const reg = /^\D+$/;
+        name = this.value;
+        if (name != '') {
+            if (reg.test(name)) {
+                showArticle();
+                loadImage(`https://cors.io/?https://maps.googleapis.com/maps/api/place/textsearch/json?query=${name}&key=AIzaSyAVEoBlH2p65Whg0bJsP3TeJfvTMXBqMFc`)
+                    .then(function () {
+                        if (cityExists === true) {
+                            loadWeatherInformation(`https://cors.io/?http://api.openweathermap.org/data/2.5/weather?q=${name}&APPID=bc4acb56e5405a03961d16e5733e0d79`)
+                        } else {
+                            return false;
+                        }
+                    })
+                    .then(() => {
+                        setTimeout(() => {
+                            document.querySelector('.preloader').style.opacity = 0;
+                            document.querySelector('.preloader').style.zIndex = -2;
+                        }, 500)
+                    });
+            }
+        }
+    }
+}

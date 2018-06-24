@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>WeatherApp</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section class="weather-app">
+        <header class="app-header">
+            <h1 class="header-title">WeatherApp</h1>
+            <input type="text" id="city-to-check" placeholder="Write name of your city">
+        </header>
+        <article class="typed-city-container">
+            <div class="preloader">
+                <div class="container">
+                    <div class="dot dot-1"></div>
+                    <div class="dot dot-2"></div>
+                    <div class="dot dot-3"></div>
+                </div>
+            </div>
+            <div class="city-image"></div>
+            <div class="city-info">
+                <h3 class="city-title">,</h3>
+                <p class="city-country">kraj:L</p>
+                <p class="city-temp">temperatura:</p>
+                <p class="city-wind">wiatr:</p>
+                <p class="city-pressure">ciśnienie:</p>
+                <p class="city-data-of-day">dane na dzień:</p>
+            </div>
+        </article>
+    </section>
+    <script src="main.js"></script>
+</body>
+
+</html>
