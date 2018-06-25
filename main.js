@@ -68,7 +68,7 @@ function loadWeatherInformation(url) {
 }
 
 function checkWeather(e) {
-    //    e.preventDefault();
+    e.preventDefault();
     if (e.keyCode === 13) {
         this.blur();
         document.querySelector('.preloader').style.opacity = 1;
@@ -79,7 +79,6 @@ function checkWeather(e) {
         if (name != '') {
             if (reg.test(name)) {
                 if (name != undefined) {
-
                     showArticle();
                     loadImage(`https://cors.io/?https://maps.googleapis.com/maps/api/place/textsearch/json?query=${name}&key=AIzaSyAVEoBlH2p65Whg0bJsP3TeJfvTMXBqMFc`)
                         .then(function () {
