@@ -164,6 +164,9 @@
 }
 
 @media(max-width:767px) {
+    .weather-app .app-header {
+        min-height: 40vh;
+    }
     .app-header #city-to-check {
         width: 80%;
     }
@@ -174,13 +177,18 @@
         flex-direction: column;
     }
     .typed-city-container .city-image {
-        min-height: 50vh;
+        min-height: 30vh;
         width: 100%;
     }
     .typed-city-container .city-info {
         width: 100%;
     }
-
+    .typed-city-container .city-info h3 {
+        font-size: 3.5rem;
+    }
+    .typed-city-container .city-info p {
+        font-size: 1.6rem;
+    }
 }
 
 @media(min-width:768px) {
