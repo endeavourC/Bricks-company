@@ -7,6 +7,7 @@ let cityPressure = document.querySelector('.city-pressure');
 let cityDataOfDay = document.querySelector('.city-data-of-day');
 let cityImage = document.querySelector('.city-image');
 let cityExists = false;
+let name;
 cityNameInp.addEventListener('keyup', checkWeather);
 
 function loadImage(url) {
@@ -15,7 +16,10 @@ function loadImage(url) {
         .then(data => {
             if (data.status === "OK") {
                 let reference = data.results[0].photos[0].photo_reference;
+                console.log(data)
                 if (reference) {
+                    cityTitle.innerHTML = `${data.results[0].name},`;
+                    name = data.results[0].name;
                     cityImage.style.backgroundImage = `url(https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference=${reference}&key=AIzaSyAVEoBlH2p65Whg0bJsP3TeJfvTMXBqMFc)`
                     cityExists = true;
                 }
@@ -53,7 +57,7 @@ function loadWeatherInformation(url) {
         .then(data => data.json())
         .then(data => {
             console.log(data)
-            cityTitle.innerHTML = `${data.name},`;
+            //            cityTitle.innerHTML = `${data.name},`;
             cityCountry.innerHTML = `kraj: ${data.sys.country}`;
             cityTemp.innerHTML = `temperatura: ${convertDegrees(data.main.temp)}`;
             cityWind.innerHTML = `wiatr: ${convertWindUnit(data.wind.speed)} `;
@@ -63,7 +67,7 @@ function loadWeatherInformation(url) {
         })
 }
 
-function checkWeather(e, name) {
+function checkWeather(e) {
     e.preventDefault();
     if (e.keyCode === 13) {
         document.querySelector('.preloader').style.opacity = 1;
@@ -72,21 +76,25 @@ function checkWeather(e, name) {
         name = this.value;
         if (name != '') {
             if (reg.test(name)) {
-                showArticle();
-                loadImage(`https://cors.io/?https://maps.googleapis.com/maps/api/place/textsearch/json?query=${name}&key=AIzaSyAVEoBlH2p65Whg0bJsP3TeJfvTMXBqMFc`)
-                    .then(function () {
-                        if (cityExists === true) {
-                            loadWeatherInformation(`https://cors.io/?http://api.openweathermap.org/data/2.5/weather?q=${name}&APPID=bc4acb56e5405a03961d16e5733e0d79`)
-                        } else {
-                            return false;
-                        }
-                    })
-                    .then(() => {
-                        setTimeout(() => {
-                            document.querySelector('.preloader').style.opacity = 0;
-                            document.querySelector('.preloader').style.zIndex = -2;
-                        }, 500)
-                    });
+                if (name != undefined) {
+
+                    showArticle();
+                    loadImage(`https://cors.io/?https://maps.googleapis.com/maps/api/place/textsearch/json?query=${name}&key=AIzaSyAVEoBlH2p65Whg0bJsP3TeJfvTMXBqMFc`)
+                        .then(function () {
+                            if (cityExists === true) {
+                                loadWeatherInformation(`https://cors.io/?http://api.openweathermap.org/data/2.5/weather?q=${name}&APPID=bc4acb56e5405a03961d16e5733e0d79`)
+                            } else {
+                                return false;
+                            }
+                        })
+                        .then(() => {
+                            setTimeout(() => {
+                                document.querySelector('.preloader').style.opacity = 0;
+                                document.querySelector('.preloader').style.zIndex = -2;
+                            }, 500)
+                        });
+                }
+
             }
         }
     }
