@@ -68,13 +68,14 @@ function loadWeatherInformation(url) {
 }
 
 function checkWeather(e) {
-    e.preventDefault();
+    //    e.preventDefault();
     if (e.keyCode === 13) {
         this.blur();
         document.querySelector('.preloader').style.opacity = 1;
         document.querySelector('.preloader').style.zIndex = 1;
         const reg = /^\D+$/;
         name = this.value;
+        this.value = '';
         if (name != '') {
             if (reg.test(name)) {
                 if (name != undefined) {
