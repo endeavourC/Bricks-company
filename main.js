@@ -8,6 +8,7 @@ let cityDataOfDay = document.querySelector('.city-data-of-day');
 let cityImage = document.querySelector('.city-image');
 let cityExists = false;
 let name;
+let dataLoaded = false;
 cityNameInp.addEventListener('keyup', checkWeather);
 
 function loadImage(url) {
@@ -16,7 +17,6 @@ function loadImage(url) {
         .then(data => {
             if (data.status === "OK") {
                 let reference = data.results[0].photos[0].photo_reference;
-                console.log(data)
                 if (reference) {
                     cityTitle.innerHTML = `${data.results[0].name},`;
                     name = data.results[0].name;
@@ -25,6 +25,14 @@ function loadImage(url) {
                 }
             } else {
                 cityExists = false;
+                if (cityExists === false) {
+                    cityTitle.innerHTML = ``;
+                    cityCountry.innerHTML = `Przepraszamy, nie znaleźliśmy  miasta ${name}.`;
+                    cityTemp.innerHTML = ``;
+                    cityWind.innerHTML = ``;
+                    cityPressure.innerHTML = ``;
+                    cityDataOfDay.innerHTML = ``;
+                }
                 return false;
             }
         })
@@ -56,15 +64,27 @@ function loadWeatherInformation(url) {
     return fetch(url)
         .then(data => data.json())
         .then(data => {
-            console.log(data)
-            //            cityTitle.innerHTML = `${data.name},`;
-            cityCountry.innerHTML = `kraj: ${data.sys.country}`;
-            cityTemp.innerHTML = `temperatura: ${convertDegrees(data.main.temp)}`;
-            cityWind.innerHTML = `wiatr: ${convertWindUnit(data.wind.speed)} `;
-            cityPressure.innerHTML = `ciśnienie:  ${data.main.pressure} hPa`;
-            cityDataOfDay.innerHTML = `dane na dzień: ${getDate(leadingZero)}`
+            if (data.cod === 200) {
+                dataLoaded = true;
+                if (dataLoaded) {
+                    cityCountry.innerHTML = `kraj: ${data.sys.country}`;
+                    cityTemp.innerHTML = `temperatura: ${convertDegrees(data.main.temp)}`;
+                    cityWind.innerHTML = `wiatr: ${convertWindUnit(data.wind.speed)} `;
+                    cityPressure.innerHTML = `ciśnienie:  ${data.main.pressure} hPa`;
+                    cityDataOfDay.innerHTML = `dane na dzień: ${getDate(leadingZero)}`
+                }
+
+            } else {
+                dataLoaded = false;
+                cityCountry.innerHTML = `Przepraszamy, znaleźlismy miasto ale nie mamy danych dotyczących temperatury.`;
+                cityTemp.innerHTML = ``;
+                cityWind.innerHTML = ``;
+                cityPressure.innerHTML = ``;
+                cityDataOfDay.innerHTML = ``;
+            }
 
         })
+        .catch(err => console.log(err))
 }
 
 function checkWeather(e) {
