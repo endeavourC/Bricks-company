@@ -10,6 +10,43 @@ html {
     font-size: 10px;
 }
 
+.page-loader {
+    display: flex;
+    justify-content: center;
+    -ms-align-items: center;
+    align-items: center;
+    position: fixed;
+    min-height: 100vh;
+    width: 100%;
+    top: 0;
+    z-index: 9999999;
+    left: 0;
+    background: rgba(255, 255, 255, .95);
+}
+
+.nb-spinner {
+    width: 75px;
+    height: 75px;
+    margin: 0;
+    background: transparent;
+    border-top: 5px solid #009EE2;
+    border-right: 5px solid transparent;
+    border-radius: 50%;
+    -webkit-animation: .7s spin linear infinite;
+    animation: .7s spin linear infinite;
+}
+
+@keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
 .hidden {
     display: none;
 }
@@ -166,10 +203,10 @@ nav .main-list {
 }
 
 .primary-list {
-    top: 125%;
+    top: 58px;
     background-color: #1D1E18;
-    width: 130%;
-    left: -15%;
+    width: 200px;
+    left: -32%;
     opacity: 0;
     z-index: -999;
     overflow: hidden;
@@ -195,7 +232,8 @@ nav .main-list {
 
 .primary-list li {
     text-align: center;
-    padding: 1rem .5rem;
+    padding: 2rem 1.5rem;
+    ;
 }
 
 .primary-list li a {

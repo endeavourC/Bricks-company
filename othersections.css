@@ -64,6 +64,7 @@
     overflow: hidden;
     max-height: 270px;
     cursor: pointer;
+    outline: none;
     position: relative;
 }
 
