@@ -130,13 +130,36 @@ h3.bramy-product-title {
     }
 }
 
-@media(max-width:768px) {
+@media( max-width:767px) {
     .main-list li {
         padding: 2rem;
     }
+    .bramy-product p {
+        font-size: 1.3rem;
+    }
+}
+
+@media(max-width:768px) {
+
     .bramy-product {
         flex-basis: 100%;
         max-height: 330px;
+    }
+    .zestawy-header {
+        font-size: 3.5rem;
+    }
+    .bramy-title {
+        font-size: 3.5rem;
+    }
+    h3.bramy-product-title {
+        font-size: 2.2rem;
+    }
+    .bramy-product h3 {
+        font-size: 2.2rem;
+
+    }
+    .bramy-product p {
+        font-size: 1.5rem;
     }
 }
 
@@ -148,7 +171,7 @@ h3.bramy-product-title {
 
 @media(max-width: 400px) {
     .bramy-product {
-        max-height: 200px;
+        max-height: 180px;
     }
 }
 

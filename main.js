@@ -30,21 +30,7 @@ $(window).on('load', function () {
     }
     startSlider();
 
-    function changeActiveClass() {
-        var position = pageYOffset + 70;
-        if (position > $('.came-connect').offset().top && position < $('.contact').offset().top) {
-            $('.main-list li a').removeClass('active');
-            $('.came-connect-href').addClass("active");
-        } else if (position > $('.contact').offset().top) {
-            $('.main-list li a').removeClass("active");
-            $('.contact-href').addClass("active");
-        } else if (position < $('.came-connect').offset().top) {
-            $('.main-list li a').removeClass("active");
-            $('.home').addClass('active');
 
-        }
-    }
-    $(window).on('scroll', changeActiveClass)
 
     function toggleMenu() {
         $('#nav-icon').toggleClass('open');
@@ -61,11 +47,13 @@ $(window).on('load', function () {
     function scrollTo(e, element) {
         if (!$(this).is(':animated')) {
             element = $(this).data('name');
-            $('nav').removeClass('toggle');
-            $('#nav-icon').removeClass('open');
-            return $('body,html').animate({
-                scrollTop: $('.' + element).offset().top - 60 + 'px',
-            }, 500, "swing")
+            if (element) {
+                $('nav').removeClass('toggle');
+                $('#nav-icon').removeClass('open');
+                return $('body,html').animate({
+                    scrollTop: $('.' + element).offset().top - 60 + 'px',
+                }, 500, "swing")
+            }
         } else {
             return false;
         }
@@ -95,5 +83,35 @@ $(window).on('load', function () {
 
         }
 
-    })
+    });
+
+    function sendForm(e) {
+        e.preventDefault();
+        const mailReg = new RegExp('^[0-9a-zA-Z_.-]+@[0-9a-zA-Z.-]+\.[a-zA-Z]{2,3}$', 'gi');
+        const phoneReg = new RegExp("^[0-9]*$");
+        const nameReg = /^\D+$/;
+        let name = $('.name').val();
+        let email = $('.email').val();
+        let tel = $('.tel').val();
+        let topic = $('.topic').val();
+        if (mailReg.test(email) && phoneReg.test(tel) && nameReg.test(name) && nameReg.test(topic)) {
+            if (name.length > 5) {
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('tel', tel);
+                formData.append('topic', topic);
+                const ajax = new XMLHttpRequest();
+                ajax.open('POST', 'form.php', true);
+                ajax.send(formData);
+            } else {
+                return false;
+            }
+        }
+
+
+    }
+    $('#contact-form').on('submit', sendForm);
+
+
 })
