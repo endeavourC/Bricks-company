@@ -1,117 +1,147 @@
+$('.services-list li, .services h3,.about-text,.about img,.offer h3, .offer article img, .offer-text,.creating-process,#contact-form input,.contact article h3').addClass('hidden');
 $(window).on('load', function () {
-    $('.page-loader').fadeOut(600);
-    let sliderCounter = 0;
 
-    function startSlider() {
-        let elements = $('.slideshow').find('div');
-        let sliderTimer = 3500;
-        let startInterval = false;
-        let slideIn = function () {
-            if (sliderCounter === 3) {
-                sliderCounter = -1;
+    $('.page-loader').fadeOut(700);
+    const pageSlider = {
+        slideLength: $('.slider-container').children().length,
+        slider: $('.slider-container'),
+        easingTime: 700,
+        easing: 'easeInOutExpo',
+        rightBtn: $('.fa-arrow-right'),
+        leftBtn: $('.fa-arrow-left'),
+        interval: null,
+        intervalTime: 3000,
+        slidein: function () {
+            let elements = $('.slider-container').find('.slideshow');
+            if (!this.slider.is(":animated")) {
+                this.slider.animate({
+                    marginLeft: '-100vw',
+                }, this.easingTime, this.easing, function () {
+                    elements.last().after(elements.first());
+                    this.slider.css({
+                        marginLeft: 0,
+                    })
+                }.bind(this))
             }
-            sliderCounter++;
-            elements.eq(sliderCounter).fadeIn(800).siblings('div').fadeOut(800);
+        },
+        switchRight: function () {
+            this.rightBtn.on('click', function (elements) {
+                clearInterval(this.interval);
+                elements = $('.slider-container').find('.slideshow');
+                if (!this.slider.is(":animated")) {
+                    this.slider.animate({
+                        marginLeft: '-100vw',
+                    }, this.easingTime, this.easing, function () {
+                        elements.last().after(elements.first());
+                        this.slider.css({
+                            marginLeft: 0,
+                        })
+                    }.bind(this))
+                    this.interval = setInterval(function () {
+                        this.slidein();
+                    }.bind(this), this.intervalTime);
+                }
+            }.bind(this))
+        },
+        switchLeft: function () {
+            this.leftBtn.on('click', function (elements) {
+                clearInterval(this.interval);
+                elements = $('.slider-container').find('.slideshow');
+                if (!this.slider.is(":animated")) {
+                    this.slider.css({
+                        marginLeft: '-100vw',
+                    })
+                    elements.first().before(elements.last());
+                    this.slider.animate({
+                        marginLeft: 0,
+                    }, this.easingTime, this.easing);
+                    this.interval = setInterval(function () {
+                        this.slidein();
+                    }.bind(this), this.intervalTime)
+                }
+            }.bind(this))
+        },
+        doInterval: function () {
+            $(window).on('focus', function () {
+                this.interval = setInterval(function () {
+                    this.slidein();
+                }.bind(this), this.intervalTime)
+            }.bind(this));
+            $(window).on('blur', function () {
+                clearInterval(this.interval);
+            }.bind(this))
+            this.interval = setInterval(function () {
+                this.slidein();
+            }.bind(this), this.intervalTime)
+        },
+        start: function () {
+            this.switchRight();
+            this.switchLeft();
+            this.doInterval();
         }
-        $(window).on('blur', function () {
-            clearInterval(startInterval);
-            startInterval = false;
-
-        });
-        $(window).on('focus', function () {
-            startInterval = setInterval(function () {
-                slideIn();
-            }, sliderTimer)
-        })
-        startInterval = setInterval(() => {
-            slideIn();
-        }, sliderTimer)
 
     }
-    startSlider();
+    pageSlider.start();
 
+    function resizeHeader() {
+        if (pageYOffset > 0) {
+            $('.page-header').height(60)
+        } else {
+            $('.page-header').height(80)
+        }
+    };
 
+    function showElements(elements, mode, del) {
+        let offset = pageYOffset;
+        let height = $(window).height();
+        let position = elements.offset().top;
+        let method = mode;
+        let distance = 300;
+        let elToShow = elements;
+        if (method != undefined) {
+            if (position != undefined) {
+                if (offset - distance > position - height) {
+                    elements.removeClass(del);
+                    elements.addClass(method);
+                }
+            }
+        }
+    }
+
+    function moveTo(e, ahref) {
+        e.preventDefault();
+        $('#nav-icon').removeClass('open');
+        $('.page-navigation').removeClass('active');
+        ahref = $(this).attr('href');
+        if (!$('body,html').is(':animated')) {
+
+            $('body,html').animate({
+                scrollTop: $(ahref).offset().top - 60 + 'px',
+            }, 1000, 'easeInOutExpo')
+        }
+    }
+    $('.page-navigation ul li a').on('click', moveTo);
 
     function toggleMenu() {
         $('#nav-icon').toggleClass('open');
-        $('nav').toggleClass('toggle');
-    }
-
-    function togglePrimaryMenu() {
-        $('.primary-list').toggleClass('toggle');
-    }
-    $('#nav-icon-container').on('click', toggleMenu);
-    $('.products-list').on('click', togglePrimaryMenu);
-
-
-    function scrollTo(e, element) {
-        if (!$(this).is(':animated')) {
-            element = $(this).data('name');
-            if (element) {
-                $('nav').removeClass('toggle');
-                $('#nav-icon').removeClass('open');
-                return $('body,html').animate({
-                    scrollTop: $('.' + element).offset().top - 60 + 'px',
-                }, 500, "swing")
-            }
-        } else {
-            return false;
-        }
+        $('.page-navigation').toggleClass('active');
+    };
+    $('#nav-icon-container').on('click', toggleMenu)
+    $(window).on('scroll', function () {
+        resizeHeader();
+        showElements($('.services-list li'), 'fadeIn', 'hidden');
+        showElements($('.services h3'), 'fadeInLeft', 'hidden');
+        showElements($('.about-text'), 'fadeInLeft', 'hidden');
+        showElements($('.about img'), 'fadeInLeft', 'hidden');
+        showElements($('.offer h3'), 'fadeInTop', 'hidden');
+        showElements($('.offer article img'), 'fadeInLeft', 'hidden');
+        showElements($('.offer-text'), 'fadeInTop', 'hidden');
+        showElements($('.creating-process'), 'fadeInLeft', 'hidden');
+        showElements($('#contact-form input'), 'fadeInLeft', 'hidden');
+        showElements($('.contact article h3'), 'fadeInTop', 'hidden');
 
 
-    }
-    $('.main-list li a').on('click', scrollTo)
 
-    function clearfx(element, name) {
-        return $(element).removeClass(name);
-    }
-    $('.bramy-product').on('click', function () {
-        $(this).toggleClass('show').siblings('div').removeClass('show');
-        $('.bramy-product h3,.bramy-product>ul>li,.bramy-product > p').css({
-            opacity: 0,
-        })
-        if ($(this).hasClass('show')) {
-            clearfx('.bramy-product', 'show')
-            $(this).addClass('show');
-            $(this).find('p,li,h3').css({
-                opacity: 1,
-            })
-        } else {
-            $(this).find('p,li,h3').css({
-                opacity: 0,
-            })
+    })
 
-        }
-
-    });
-
-    function sendForm(e) {
-        e.preventDefault();
-        const mailReg = new RegExp('^[0-9a-zA-Z_.-]+@[0-9a-zA-Z.-]+\.[a-zA-Z]{2,3}$', 'gi');
-        const phoneReg = new RegExp("^[0-9]*$");
-        const nameReg = /^\D+$/;
-        let name = $('.name').val();
-        let email = $('.email').val();
-        let tel = $('.tel').val();
-        let topic = $('.topic').val();
-        if (mailReg.test(email) && phoneReg.test(tel) && nameReg.test(name) && nameReg.test(topic)) {
-            if (name.length > 5) {
-                const formData = new FormData();
-                formData.append('name', name);
-                formData.append('email', email);
-                formData.append('tel', tel);
-                formData.append('topic', topic);
-                const ajax = new XMLHttpRequest();
-                ajax.open('POST', 'form.php', true);
-                ajax.send(formData);
-            } else {
-                return false;
-            }
-        }
-
-
-    }
-    $('#contact-form').on('submit', sendForm);
-
-
-})
+});
