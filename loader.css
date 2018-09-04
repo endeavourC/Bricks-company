@@ -12,6 +12,7 @@
 .loaded.preloader {
     opacity: 0;
     transition: 1.1s ease;
+
 }
 
 .loader-section {
