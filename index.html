@@ -5,173 +5,61 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Site</title>
-    <link rel="stylesheet" href="animation.css">
-    <link rel="stylesheet" href="hamburger.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question App</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin|Montserrat|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="loader.css">
 </head>
 
 <body>
-    <section class="page-loader">
-        <div class="nb-spinner"></div>
-    </section>
-    <header class="page-header">
-        <div class="wrapper">
-            <div class="page-logo">create <span>yourself</span></div>
-            <div id="nav-icon-container">
-                <div id="nav-icon">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-            <nav class="page-navigation">
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#offer">Offer</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+    <div class="preloader" style="display:none;">
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+        <div class="spinner">
         </div>
-    </header>
-    <section id="home" class="page-slider">
-        <div class="arrow-left">
-            <i class="fas fa-arrow-left"></i>
-        </div>
-        <div class="arrow-right">
-            <i class="fas fa-arrow-right"></i>
-        </div>
-        <div class="slider-container">
-            <div class="slideshow slider-one">
-                <article>
-                    <div class="decoration-top"></div>
-                    <h1 class="slideshow-header"><span>create</span> your business</h1>
-                    <p class="slideshow-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem voluptatibus unde culpa provident sequi quia possimus delectus soluta reiciendis expedita</p>
-                    <div class="decoration-bottom"></div>
-                </article>
-            </div>
-            <div class="slideshow slider-two">
-                <article>
-                    <div class="decoration-top"></div>
-                    <h1 class="slideshow-header"><span>make</span>good advertisment</h1>
-                    <p class="slideshow-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima laudantium ipsam et commodi placeat expedita delectus quis consequatur officiis dolore!</p>
-                    <div class="decoration-bottom"></div>
-                </article>
-            </div>
-            <div class="slideshow slider-three">
-                <article>
-                    <div class="decoration-top"></div>
-                    <h1 class="slideshow-header"><span>earn</span>more money</h1>
-                    <p class="slideshow-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia corporis nobis sint vel nihil debitis praesentium alias eaque natus cum.</p>
-                    <div class="decoration-bottom"></div>
-                </article>
-            </div>
-        </div>
-    </section>
+    </div>
+    <div class="friend-modal">
+        <p>Poprawna odpowiedź to: <span class="friend-modal-answer">D</span></p>
+        <button class="ok">OK</button>
+    </div>
+    <div class="lost-modal">
+        <p>Przegrałeś, twoja wygrana to: </p>
+        <button class="replay">Zagraj jeszcze raz</button>
+    </div>
+
     <main>
-        <section id="services" class="services">
-            <h3 class="section-header">our services</h3>
-            <ul class="services-list">
-                <li>
-                    <div class="fav-box"><i class="fas fa-mobile"></i></div>
-                    <h4>Responsive Design</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam quisquam praesentium quasi laboriosam quae voluptas atque soluta perspiciatis natus alias.</p>
-
-                </li>
-                <li>
-                    <div class="fav-box"><i class="fas fa-chart-pie"></i></div>
-                    <h4>Google analitycs</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam quisquam praesentium quasi laboriosam quae voluptas atque soluta perspiciatis natus alias.</p>
-                </li>
-                <li>
-                    <div class="fav-box"><i class="fas fa-globe"></i></div>
-                    <h4>Backup</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam quisquam praesentium quasi laboriosam quae voluptas atque soluta perspiciatis natus alias.</p>
-                </li>
-                <li>
-                    <div class="fav-box"><i class="fas fa-paste"></i></div>
-                    <h4>Clipboard</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam quisquam praesentium quasi laboriosam quae voluptas atque soluta perspiciatis natus alias.</p>
-                </li>
-            </ul>
-        </section>
-        <section id="about" class="about">
-            <article>
-                <div class="about-text">
-                    <div class="decoration-top ab-dec-top"></div>
-                    <h3 class="section-header">about</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias ut qui minus aliquid odio suscipit? A explicabo, voluptates consequuntur odit nam deleniti dicta facere, incidunt modi error adipisci obcaecati inventore?</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum corrupti pariatur aperiam dignissimos, veritatis adipisci ex, quae odio magni voluptate.</p>
-                    <div class="decoration-bottom ab-dec-bot"></div>
-                </div>
-                <img src="zdj/smartmockups_jhz19ey8.jpeg" alt="Mockup of website aquajet24">
-            </article>
-        </section>
-        <section id="offer" class="offer">
-            <h3 class="section-header">WHAT WE OFFER</h3>
-            <article>
-                <img src="zdj/offer.jpeg" alt="Picture shows what our company offer to you">
-                <div class="offer-text">
-                    <div class="decoration-top"></div>
-                    <h4 class="section-header">Our offer</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum sunt ullam, voluptate. Rerum, deleniti aliquam quae dolore, ipsa eos recusandae laboriosam unde veniam, quod perferendis dignissimos impedit ducimus! Aspernatur, provident.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non eum laudantium natus ullam, dolor necessitatibus autem repudiandae. Cumque, pariatur sed.</p>
-                    <div class="decoration-bottom"></div>
-                </div>
-            </article>
-            <div class="creating-process">
-                <div class="line"></div>
-                <div class="processing-box">
-                    <div class="processing-circle">
-                        <p>1</p>
-                    </div>
-                    <h4>Creating your site</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores eveniet, et ad ullam explicabo doloribus? Nobis quisquam esse fuga autem!</p>
-                </div>
-                <div class="processing-box">
-                    <div class="processing-circle">
-                        <p>2</p>
-                    </div>
-                    <h4>Make huge advertisment</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt impedit error delectus tenetur, soluta veritatis aliquam eveniet sed itaque consectetur.</p>
-                </div>
-                <div class="processing-box">
-                    <div class="processing-circle">
-                        <p>3</p>
-                    </div>
-                    <h4>Get a lot of customers</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima a, modi facere illo reiciendis temporibus eveniet beatae atque minus animi.</p>
+        <div class="container">
+            <div class="category">
+                <img class="category-image" src="images/food.jpg" alt="">
+                <div class="buttons">
+                    <button class="half">50/50</button>
+                    <button class="change">zmiana</button>
+                    <button class="friend">telefon</button>
+                    <div class="price have">100</div>
+                    <div class="price">500</div>
+                    <div class="price">1000</div>
+                    <div class="price">2000</div>
+                    <div class="price">4000</div>
+                    <div class="price">8000</div>
+                    <div class="price">16000</div>
+                    <div class="price">32000</div>
+                    <div class="price">125000</div>
+                    <div class="price">250000</div>
+                    <div class="price">500000</div>
+                    <div class="price">1000000</div>
+                    <div class="prize">Twoja wygrana: </div>
                 </div>
             </div>
-        </section>
-        <section id="contact" class="contact">
-            <article>
-                <h3 class="section-header">Contact Us</h3>
-                <form action="" id="contact-form">
-                    <div class="form-wrapper">
-                        <div>
-                            <input name="username" type="text" placeholder="name & surname">
-                        </div>
-                        <div>
-                            <input type="email" name="email" placeholder="e-mail">
-                        </div>
-                        <textarea name="message" id="message" placeholder="Type here your message"></textarea>
-                    </div>
-                    <div class="button-wrapper">
-                        <button>Send</button>
-
-                    </div>
-                </form>
-            </article>
-        </section>
+            <div class="questions">
+                <div class="question">Jakieś testowe pytranie?</div>
+                <div class="first-answer answer">A</div>
+                <div class="second-answer answer">B</div>
+                <div class="third-answer answer">C</div>
+                <div class="four-answer answer">D</div>
+            </div>
+        </div>
     </main>
-    <script src="jquery-3.2.1.min.js"></script>
-    <script src="easing.js"></script>
+    <script src="question.js"></script>
     <script src="main.js"></script>
 </body>
 
