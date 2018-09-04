@@ -1,5 +1,7 @@
 window.addEventListener('DOMContentLoaded', function () {
-    document.querySelector('.preloader').classList.add('loaded');
+    setTimeout(function () {
+        document.querySelector('.preloader').classList.add('loaded');
+    }, 1000)
 
     let takenQuest = [];
     let currentQuest = [];

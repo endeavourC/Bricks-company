@@ -23,13 +23,13 @@
 }
 
 .section-left {
-    background-color: #1c1c1c;
+    background-color: #2DCC70;
     box-shadow: 0 0 5px #000000;
     left: 0;
 }
 
 .section-right {
-    background-color: #acacac;
+    background-color: #d63031;
     box-shadow: 1px 1px 5px #000000;
     right: 0;
 }
