@@ -1,82 +1,50 @@
-    $('.about-header,.about-info,.f,.left-side-offer-content,.contact h1,.image-one,.image-three,.image-six,.image-eight').addClass('fadeout');
-
-    $(window).on('load', function () {
-        $('.loader').fadeOut(600);
-        const hamburgerBtn = $('div#nav-icon-container');
-        const mainSliderArray = [$('div.image-first'), $('div.image-second')];
-        hamburgerBtn.on('click', function () {
-            $('#nav-icon').toggleClass('open');
-            $('header nav ul').toggleClass('show');
-        });
-        let navigationLink = $('nav ul li a');
-
-        function moveTo(data) {
-            $('#nav-icon').removeClass('open');
-            $('header nav ul').removeClass('show');
-            data = $(this).data('name');
-            $('body,html').animate({
-                scrollTop: $('.' + data).offset().top - 80 + 'px'
-            }, 500, 'swing')
-        };
-
-
-        $('.start').on('click', function () {
-            $('html,body').animate({
-                scrollTop: $('.about').offset().top - 80 + 'px',
-            }, 1000, 'swing');
-        })
-        navigationLink.on('click', moveTo);
-        $(window).on('scroll', function () {
-            let about = $('.about').offset().top;
-            let offer = $('.offer').offset().top;
-            let gallery = $('.gallery').offset().top;
-            let contact = $('.contact').offset().top;
-            let pg = pageYOffset;
-            if (pg + 300 > about && pg < offer) {
-                $('.about-header').addClass('fadein').removeClass('fadeout');
-                $('.about-info').addClass('fadein').removeClass('fadeout');
-            };
-            if (pg + 300 > offer && pg < gallery) {
-                $('.f').addClass('fadein').removeClass('fadeout');
-            };
-            if (pg + 200 > $('.offer-features').offset().top && pg < gallery) {
-                $('.left-side-offer-content').addClass('fadein').removeClass('fadeout')
-            };
-            if (pg + 300 > gallery && pg < contact) {
-                $('.image-one,.image-three,.image-six,.image-eight').addClass('fadein').removeClass('fadeout')
-            }
-            if (pg + 400 > contact) {
-                $('.contact h1').addClass('fadein').removeClass('fadeout')
-
-            }
-        });
-        const arrowLeft = $('i.fa-caret-left');
-        const arrowRight = $('i.fa-caret-right');
-        const exitBtn = $('i.fa-times');
-        let currentImage;
-        let imageToClick = $('.gallery').find('div');
-        let gallerySliderImage = $('.gallery-slider').find('img');
-        imageToClick.on('click', function () {
-            currentImage = $(this).data('value');
-            $('.gallery-slider').fadeIn(300);
-            gallerySliderImage.eq(currentImage).fadeIn(300);
-        });
-        arrowRight.on('click', function () {
-            if (currentImage === 7) {
-                currentImage = -1;
-            }
-            currentImage++;
-            gallerySliderImage.eq(currentImage).fadeIn(400).siblings('img').fadeOut(400);
-        });
-        arrowLeft.on('click', function () {
-            if (currentImage === 0) {
-                currentImage = gallerySliderImage.length;
-            }
-            currentImage--;
-            gallerySliderImage.eq(currentImage).fadeIn(400).siblings('img').fadeOut(400)
-        });
-        exitBtn.on('click', function () {
-            $('.gallery-slider').fadeOut(300);
-            gallerySliderImage.fadeOut(300);
-        })
-    });
+const dateInfoCtn = document.querySelector(".wake-info");
+let isActive = false;
+let waitingClock = null;
+let getUserMusic = new Audio("Rumors.mp3");
+getUserMusic.loop = true;
+getUserMusic.autoplay = false;
+const startTime = function(userDate) {
+  let time = new Date();
+  let currentHours = time.getHours();
+  let currentMinutes = time.getMinutes();
+  let currentTime = `${leadingZero(currentHours)}:${leadingZero(
+    currentMinutes
+  )}`;
+  checkTime(currentTime, userDate);
+};
+const leadingZero = function(number) {
+  return number > 10 ? number : "0" + number;
+};
+const checkTime = function(currentTime, userDate) {
+  setInfo(userDate);
+  if (currentTime === userDate) {
+    getUserMusic.play();
+    document.querySelector(".none").classList.remove("none");
+    clearInterval(waitingClock);
+  }
+};
+const setInfo = function(userDate) {
+  dateInfoCtn.innerHTML = `Ustawiłeś budzik na ${userDate}`;
+};
+const setClock = function() {
+  let userDate = document.querySelector(".wake-up-val-input").value;
+  if (userDate != "") {
+    if (isActive === false) {
+      isActive = true;
+      waitingClock = setInterval(function() {
+        startTime(userDate);
+      }, 1000);
+    }
+  } else {
+    alert("Podaj godzinę!");
+  }
+};
+const turnOffClock = function() {
+  getUserMusic.pause();
+  getUserMusic.currentTime = 0;
+};
+document.querySelector(".wake-up-btn").addEventListener("click", setClock);
+document
+  .querySelector("#turn-on-clock")
+  .addEventListener("click", turnOffClock);
